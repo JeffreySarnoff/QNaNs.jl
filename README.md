@@ -7,10 +7,10 @@ Simplifying use of quiet NaNs to propagate information from within numerical com
 ####Quick Look
 
 ```julia
-> Pkg.clone("https://github.com/JeffreySarnoff/QNaN.jl") # expects Julia v0.5+
+> Pkg.add("QNaNs")
 ```
 ```julia
-> using QNaN
+> using QNaNs
 > a_qnan = qnan(36)
 NaN
 > typeof(a_qnan)
