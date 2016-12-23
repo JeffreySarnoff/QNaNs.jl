@@ -1,6 +1,6 @@
 module QNaNs
 
-export qnan, isqnan, isqnanPos, isqnanNeg, isjnan
+export qnan, isqnan
 
 if VERSION < v"0.6-dev"
     xor{T}(a::T, b::T) = (a $ b)
