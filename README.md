@@ -1,5 +1,5 @@
 # QNaNs.jl
-Simplifying use of quiet NaNs to propagate information from within numerical computations.
+Simplifies the use of quiet NaNs to propagate information from within numerical computations.&nbsp;&nbsp; [![Build Status](https://travis-ci.org/JeffreySarnoff/QNaNs.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/QNaNs.jl)
 ```ruby
                                                        Jeffrey Sarnoff © 2016-Mar-26 at New York
 ```
