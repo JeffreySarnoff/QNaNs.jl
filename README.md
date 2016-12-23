@@ -11,23 +11,20 @@ Simplifying use of quiet NaNs to propagate information from within numerical com
 ```
 ```julia
 > using QNaN
-> anan = qnan(36)
+> a_qnan = qnan(36)
 NaN
-> typeof(anan)
+> typeof(a_qnan)
 Float64
-> payload = qnan(anan)
+> payload = qnan(a_qnan)
 36
-> anan = qnan(Int32(-77))
+> a_qnan = qnan(Int32(-77))
 NaN32
-> payload = qnan(anan); payload, typeof(payload)
+> payload = qnan(a_nan); payload, typeof(payload)
 -77, Int32
-> isqnan(anan), isqnan(NaN)
+> isqnan(a_qnan), isqnan(NaN)
 true, true
-> isnan(anan), isnan(NaN)   # they propogate as NaNs
+> isnan(a_qnan), isnan(NaN)   # quiet NaNs areNaNs
 true, true
-> isqnan(anan), isjnan(NaN) # Julia's NaNs are discernable
-true, false
-
 ```
 ####About QNaN Propogation
 
