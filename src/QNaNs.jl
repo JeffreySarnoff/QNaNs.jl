@@ -16,9 +16,8 @@ end
   A float16 quiet NaN is represented with these 2^10-2 UInt16 hexadecimal patterns:
   (positive) UnitRange(0x7e00,0x7fff) has 2^9-1 realizations
   (negative) UnitRange(0xfe00,0xffff) has 2^9-1 realizations
-  Julia appears to assign as NaNs (generally denoting an Indeterminacy)
-  0xfff8000000000000, 0xffc00000, 0xfe00, 0x7ff8000000000000, 0x7fc00000, 0x7e00
-  Preferring not to give that more than one use, they excluded from settable QNaNs.
+  Julia appears to assign as NaNs quiet NaNs with a payload of zero:
+  0xfff8000000000000, 0xffc00000, 0xfe00, 0x7ff8000000000000, 0x7fc00000, 0x7e00.
 =#
 
 for (FL, I, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000, :0xfff8000000000000),
