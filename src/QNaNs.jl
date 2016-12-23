@@ -50,13 +50,16 @@ for (FL, I, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000,
 end
 
 @doc """
-  **qnan**(`si`::{Int16|32|64}) generates a quiet NaN with a payload of `si`
-  **qnan**(`fp`::FloatingPoint) recovers the Signed payload from `fp`
+  **qnan**(`si`::{Int16|32|64}) generates a quiet NaN with a payload of `si`  
+
+  **qnan**(`fp`::FloatingPoint) recovers the Signed payload from `fp`  
+
   **isqnan**(`fp`::FloatingPoint) true iff `fp` is any QNaN
 """ -> QNaNs
 
 @doc """
-  **qnan**(`si`::{Int16|32|64}) generates a quiet NaN with a payload of `si`
+  **qnan**(`si`::{Int16|32|64}) generates a quiet NaN with a payload of `si`  
+
   **qnan**(`fp`::FloatingPoint) recovers the Signed payload from `fp`
 """ -> qnan
 
