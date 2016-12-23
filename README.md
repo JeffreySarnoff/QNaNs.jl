@@ -31,22 +31,11 @@ NaN32
 
 ##### Quiet NaNs were designed to propagate information from within numerical computations
 
+The payload for a Float64 qnan is an integer [-(2^51-1),(2^51-1)]  
+The payload for a Float32 qnan is an integer [-(2^22-1),(2^22-1)]  
+The payload for a Float16 qnan is an integer [-(2^9-1),(2^9-1)]  
 
-```julia
-#=
-  A float64 quiet NaN is represented with these 2^52-2 UInt64 hexadecimal patterns:
-  (positive) UnitRange(0x7ff8000000000000,0x7fffffffffffffff) has 2^51-1 realizations
-  (negative) UnitRange(0xfff8000000000000,0xffffffffffffffff) has 2^51-1 realizations
-  A float32 quiet NaN is represented with these 2^23-2 UInt32 hexadecimal patterns:
-  (positive) UnitRange(0x7fc00000,0x7fffffff) has 2^22-1 realizations
-  (negative) UnitRange(0xffc00000,0xffffffff) has 2^22-1 realizations
-  A float16 quiet NaN is represented with these 2^10-2 UInt16 hexadecimal patterns:
-  (positive) UnitRange(0x7e00,0x7fff) has 2^9-1 realizations
-  (negative) UnitRange(0xfe00,0xffff) has 2^9-1 realizations
-  Julia appears to assign as NaNs quiet NaNs with a payload of zero:
-  0xfff8000000000000, 0xffc00000, 0xfe00, 0x7ff8000000000000, 0x7fc00000, 0x7e00.
-=#
-```
+Julia uses a payload of zero for NaN, NaN32, NaN16.
 
 ####About QNaN Propogation
 
