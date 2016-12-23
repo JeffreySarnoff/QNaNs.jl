@@ -1,20 +1,18 @@
 module QNaN
 
+
 export qnan, isqnan, isqnanPos, isqnanNeg, isjnan
 
 #=
   A float64 quiet NaN is represented with these 2^52-2 UInt64 hexadecimal patterns:
   (positive) UnitRange(0x7ff8000000000000,0x7fffffffffffffff) has 2^51-1 realizations
   (negative) UnitRange(0xfff8000000000000,0xffffffffffffffff) has 2^51-1 realizations
-
   A float32 quiet NaN is represented with these 2^23-2 UInt32 hexadecimal patterns:
   (positive) UnitRange(0x7fc00000,0x7fffffff) has 2^22-1 realizations
   (negative) UnitRange(0xffc00000,0xffffffff) has 2^22-1 realizations
-
   A float16 quiet NaN is represented with these 2^10-2 UInt16 hexadecimal patterns:
   (positive) UnitRange(0x7e00,0x7fff) has 2^9-1 realizations
   (negative) UnitRange(0xfe00,0xffff) has 2^9-1 realizations
-
   Julia appears to assign as NaNs (generally denoting an Indeterminacy)
   0xfff8000000000000, 0xffc00000, 0xfe00, 0x7ff8000000000000, 0x7fc00000, 0x7e00
   Preferring not to give that more than one use, they excluded from settable QNaNs.
@@ -58,19 +56,12 @@ end
 
 @doc """
 Module QNaN
-
   **qnan**(`si`::{Int16|32|64}) generates a quiet NaN with a payload of `si`
-
   **qnan**(`fp`::FloatingPoint) recovers the Signed payload from `fp`
-
   **isqnan**(`fp`::FloatingPoint) true iff `fp` is any QNaN
-
   **isqnanPos**(`fp`::FloatingPoint) true iff isqnan(`fp`) and !signbit(`fp`)
-
   **isqnanNeg**(`fp`::FloatingPoint) true iff isqnan(`fp`) and  signbit(`fp`)
-
   **isjnan**(`fp`::FloatingPoint) true iff `fp` is a QNaN that Julia uses
-
 """ -> QNaN
 
 end # module
