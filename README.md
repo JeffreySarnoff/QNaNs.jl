@@ -1,5 +1,5 @@
 # QNaNs.jl
-Simplifying use of quiet NaNs to propagate information from within numerical computations
+Simplifying use of quiet NaNs to propagate information from within numerical computations.
 ```ruby
                                                        Jeffrey Sarnoff © 2016-Mar-26 at New York
 ```
@@ -34,36 +34,8 @@ true, false
 A QNaN introduced into a numerical processing sequence usually will propogate along the computational path without loss of identity unless another QNaN is substituted or an second QNaN occurs in an arithmetic expression.
 
 AFAIK Julia propogates the lhs of `-`. When two qnans have propogated to the same function, select qnan1 over qnan2 this way: ```return qnan1 - qnan2```. ## QNaN.jl
+
 #####quiet NaNs were designed to propagate information from within numerical computations
-```ruby
-                                                       Jeffrey Sarnoff © 2016-Mar-26 at New York
-```
-
-####Quick Look
-
-```julia
-> Pkg.clone("https://github.com/J-Sarnoff/QNaN.jl") # expects Julia v0.4-any
-```
-```julia
-> using QNaN
-> anan = qnan(36)
-NaN
-> typeof(anan)
-Float64
-> payload = qnan(anan)
-36
-> anan = qnan(Int32(-77))
-NaN32
-> payload = qnan(anan); payload, typeof(payload)
--77, Int32
-> isqnan(anan), isqnan(NaN)
-true, true
-> isnan(anan), isnan(NaN)   # they propogate as NaNs
-true, true
-> isqnan(anan), isjnan(NaN) # Julia's NaNs are discernable
-true, false
-
-```
 
 
 ```julia
@@ -87,21 +59,18 @@ true, false
 A QNaN introduced into a numerical processing sequence usually will propogate along the computational path without loss of identity unless another QNaN is substituted or an second QNaN occurs in an arithmetic expression.
 
 When two qnans are arguments to the same binary op, Julia propagates the qnan on the left hand side. 
-
-
-When the information carried is costly to aquire, and one of two payload is usually the more importantd,  a pairing function may propogate more than one payload.  This is easiest whith smaller payloads. Pairing starts with zero and stops as zero is unpaired.  The initial pair: ``pair(pair(zero, first_payload),second_payload)``.
-
-
 ```julia
 > using QNaN
-> function test_rhs_of_subtract()
+> function test()
     lhs = qnan(-64)
     rhs = qnan(100)
-    (qnan(lhs-rhs)==qnan(lhs), qnan(rhs-lhs)==qnan(rhs))
+    (qnan(lhs-rhs)==qnan(lhs), qnan(rhs/lhs)==qnan(rhs))
   end;
-> test_rhs_of_subtract()
+> test()
 (true, true)
 ```
+
+When the information carried is costly to aquire, and one of two payload is usually the more importantd,  a pairing function may propogate more than one payload.  This is easiest whith smaller payloads. Pairing starts with zero and stops as zero is unpaired.  The initial pair: ``pair(pair(zero, first_payload),second_payload)``.
 
 
 #####William Kahan on QNaNs
