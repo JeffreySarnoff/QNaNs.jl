@@ -26,13 +26,8 @@ true, true
 > isnan(a_qnan), isnan(NaN)   # quiet NaNs areNaNs
 true, true
 ```
-####About QNaN Propogation
 
-A QNaN introduced into a numerical processing sequence usually will propogate along the computational path without loss of identity unless another QNaN is substituted or an second QNaN occurs in an arithmetic expression.
-
-AFAIK Julia propogates the lhs of `-`. When two qnans have propogated to the same function, select qnan1 over qnan2 this way: ```return qnan1 - qnan2```. ## QNaN.jl
-
-#####quiet NaNs were designed to propagate information from within numerical computations
+##### Quiet NaNs were designed to propagate information from within numerical computations
 
 
 ```julia
