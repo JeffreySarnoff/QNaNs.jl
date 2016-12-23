@@ -102,12 +102,6 @@ References:
 ["An Elegant Pairing Function" by Matthew Szudzik](http://szudzik.com/ElegantPairing.pdf)
 
 
-<!---
-[![Build Status](https://travis-ci.org/JeffreySarnoff/QNaN.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/QNaN.jl)
---->
-
-
-*Note: This behavior is **not** currently available at the top level of the REPL.*
 
 When the information carried is costly to aquire, and one of two payload is usually the more importantd,  a pairing function may propogate more than one payload.  This is easiest whith smaller payloads. Pairing starts with zero and stops as zero is unpaired.  The initial pair: ``pair(pair(zero, first_payload),second_payload)``.
 
@@ -139,6 +133,3 @@ References:
 ["An Elegant Pairing Function" by Matthew Szudzik](http://szudzik.com/ElegantPairing.pdf)
 
 
-<!---
-[![Build Status](https://travis-ci.org/JeffreySarnoff/QNaN.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/QNaN.jl)
---->
