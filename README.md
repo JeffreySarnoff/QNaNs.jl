@@ -28,7 +28,7 @@ NaN32
 -77, Int32
 
 > qnan16 = qnan(Int16(-77)); payload16 = qnan(qnan16);
-> qnan16, typeof(qnan16) payload, typeof(payload)
+> qnan16, typeof(qnan16) payload16, typeof(payload16)
 NaN16, Float16, -77, Int16
 
 ```
