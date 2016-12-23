@@ -52,19 +52,19 @@ end
 @doc """
   **qnan**(`si`::{Int64|32|16}) generates a quiet NaN with a payload of `si`  
 
-  **qnan**(`fp`::{Float64|32|16}) recovers the Signed payload from `fp`  
+  **qnan**(`fp`::{Float64|32|16}) recovers the signed integer payload from `fp`  
 
-  **isqnan**(`fp`::{Float64|32|16}) true iff `fp` is any QNaN
+  **isqnan**(`fp`::{Float64|32|16}) true iff `fp` is a quiet NaN
 """ -> QNaNs
 
 @doc """
   **qnan**(`si`::{Int64|32|16}) generates a quiet NaN with a payload of `si`  
 
-  **qnan**(`fp`::{Float64|32|16}) recovers the Signed payload from `fp`
+  **qnan**(`fp`::{Float64|32|16}) recovers the signed integer payload from `fp`
 """ -> qnan
 
 @doc """
-  **isqnan**(`fp`::{Float64|32|16}) true iff `fp` is any QNaN
+  **isqnan**(`fp`::{Float64|32|16}) true iff `fp` is a quiet NaN
 """ -> isqnan
 
 end # module
