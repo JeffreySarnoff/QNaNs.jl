@@ -35,8 +35,8 @@ for (FL, I, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000,
 
       function qnan(fp::$(FL))
           u = reinterpret($(UI), fp)
-          if !isqnan(u)
-              throw(ArgumentError("The value $(fp) ($(u)) is not a QNaN."))
+          if !isnan(u)
+              throw(ArgumentError("The value $(fp) ($(u)) is not a NaN."))
           end
           a = u & ~$(UNeg)
           b =  reinterpret($(I),a)
