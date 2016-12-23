@@ -1,7 +1,10 @@
 module QNaN
 
-
 export qnan, isqnan, isqnanPos, isqnanNeg, isjnan
+
+if VERSION < v"0.5.99"
+    xor{T}(a::T, b::T) = (a $ b)
+end
 
 #=
   A float64 quiet NaN is represented with these 2^52-2 UInt64 hexadecimal patterns:
@@ -49,7 +52,7 @@ for (FL, I, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000,
           end
           a = u & ~$(UNeg)
           b =  reinterpret($(I),a)
-          (((u & ($(UPos) $ $(UNeg))) == 0) ? b : -b)
+          (((u & xor($(UPos), $(UNeg))) == 0) ? b : -b)
       end
   end
 end
