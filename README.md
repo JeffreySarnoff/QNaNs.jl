@@ -21,10 +21,16 @@ Float64
 true, true
 
 # works with Float64, Float32 and Float16
+
 > a_qnan32 = qnan(Int32(-77))
 NaN32
 > payload = qnan(a_qnan32); payload, typeof(payload)
 -77, Int32
+
+> qnan16 = qnan(Int16(-77)); payload16 = qnan(qnan16);
+> qnan16, typeof(qnan16) payload, typeof(payload)
+NaN16, Float16, -77, Int16
+
 ```
 
 ##### Quiet NaNs were designed to propagate information from within numerical computations
