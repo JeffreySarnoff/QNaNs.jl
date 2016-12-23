@@ -2,7 +2,7 @@ module QNaNs
 
 export qnan
 
-if VERSION < v"0.6-dev"
+if !isdefined(:xor)
     xor{T}(a::T, b::T) = (a $ b)
 end
 
