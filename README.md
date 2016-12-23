@@ -33,6 +33,16 @@ NaN16, Float16, -77, Int16
 
 ```
 
+
+#####William Kahan on QNaNs
+
+NaNs propagate through most computations. Consequently they do get used. ... they are needed only for computation, with temporal sequencing that can be hard to revise, harder to reverse. NaNs must conform to mathematically consistent rules that were deduced, not invented arbitrarily ...
+
+NaNs [ give software the opportunity, especially when searching ] to follow an unexceptional path ( no need for exotic control structures ) to a point where an exceptional event can be appraised ... when additional evidence may have accrued ...  NaNs [have] a field of bits into which software can record, say, how and/or where the NaN came into existence. That [can be] extremely helpful [in] “Retrospective Diagnosis.”
+
+-- IEEE754 Lecture Notes (highly redacted)
+
+
 ##### Quiet NaNs were designed to propagate information from within numerical computations
 
 The payload for a Float64 qnan is an integer [-(2^51-1),(2^51-1)]  
@@ -57,13 +67,6 @@ When two qnans are arguments to the same binary op, Julia propagates the qnan on
 (true, true)
 ```
 
-#####William Kahan on QNaNs
-
-NaNs propagate through most computations. Consequently they do get used. ... they are needed only for computation, with temporal sequencing that can be hard to revise, harder to reverse. NaNs must conform to mathematically consistent rules that were deduced, not invented arbitrarily ...
-
-NaNs [ give software the opportunity, especially when searching ] to follow an unexceptional path ( no need for exotic control structures ) to a point where an exceptional event can be appraised ... when additional evidence may have accrued ...  NaNs [have] a field of bits into which software can record, say, how and/or where the NaN came into existence. That [can be] extremely helpful [in] “Retrospective Diagnosis.”
-
--- IEEE754 Lecture Notes (highly redacted)
 
 References:
 
