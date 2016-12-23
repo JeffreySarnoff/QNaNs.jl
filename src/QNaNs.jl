@@ -29,8 +29,8 @@ for (FL, I, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000,
 
       function qnan(si::$(I))
           u = reinterpret($(UI), abs(si))
-          if (u > ~$(UNeg)) # 2^51-1
-              throw(ArgumentError("The magnitude of n $(si) exceeds available QNaN."))
+          if (u > ~$(UNeg)) # 2^51-1, 2^22-1, 2^9-1
+              throw(ArgumentError("The value $(si) exceeds the payload range."))
           end
           u |= ((si > 0) ? $(UPos) : $(UNeg))
           reinterpret($(FL),u)
