@@ -1,6 +1,6 @@
 module QNaNs
 
-export qnan, isqnan
+export qnan
 
 if VERSION < v"0.6-dev"
     xor{T}(a::T, b::T) = (a $ b)
@@ -24,9 +24,6 @@ for (FL, I, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000,
                                 (:Float32, :Int32, :UInt32, :0x7fc00000, :0xffc00000),
                                 (:Float16, :Int16, :UInt16, :0x7e00, :0xfe00) ]
   @eval begin
-      @inline isqnan(x::$(UI))    = (x & $(UPos)) == $(UPos)
-      @inline isqnan(x::$(FL))    = isqnan(reinterpret($(UI),x))
-
       function qnan(si::$(I))
           u = reinterpret($(UI), abs(si))
           if (u > ~$(UNeg)) # 2^51-1, 2^22-1, 2^9-1
@@ -52,8 +49,6 @@ end
   **qnan**(`si`::{Int64|32|16}) generates a quiet NaN with a payload of `si`  
 
   **qnan**(`fp`::{Float64|32|16}) recovers the signed integer payload from `fp`  
-
-  **isqnan**(`fp`::{Float64|32|16}) true iff `fp` is a quiet NaN
 """ -> QNaNs
 
 @doc """
@@ -61,9 +56,5 @@ end
 
   **qnan**(`fp`::{Float64|32|16}) recovers the signed integer payload from `fp`
 """ -> qnan
-
-@doc """
-  **isqnan**(`fp`::{Float64|32|16}) true iff `fp` is a quiet NaN
-""" -> isqnan
 
 end # module
