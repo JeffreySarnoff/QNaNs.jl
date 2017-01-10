@@ -13,10 +13,11 @@ Simplifies the use of quiet NaNs to propagate information from within numerical 
 > using QNaNs
 > a_qnan = qnan(36)
 NaN
-> typeof(a_qnan)
-Float64
 > payload = qnan(a_qnan)
 36
+
+> typeof(a_qnan)
+Float64
 > isnan(a_qnan), isnan(NaN)   # quiet NaNs areNaNs
 true, true
 
