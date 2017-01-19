@@ -2,7 +2,7 @@ module QNaNs
 
 export qnan
 
-import Base: @pure, sign_mask, signbit
+import Base: signbit
 
 if !isdefined(:xor)
     xor{T}(a::T, b::T) = (a $ b)
@@ -26,7 +26,7 @@ for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000
                                  (:Float32, :Int32, :UInt32, :0x7fc00000, :0xffc00000),
                                  (:Float16, :Int16, :UInt16, :0x7e00, :0xfe00) ]
   @eval begin  
-      @pure signbit(x::$SI) = (x & sign_mask($FL)) == sign_mask($FL)
+      signbit(x::$SI) = signbit(reinterpret($FL,x))
         
       function qnan(si::$(SI))
           u = reinterpret($(UI), abs(si))
@@ -41,7 +41,7 @@ for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000
           !isnan(fp) && throw(ArgumentError("The value $(fp) is not a NaN."))
           u = reinterpret($(UI), fp)
           a = u & ~$(UNeg)
-          b =  reinterpret($(I),a)
+          b =  reinterpret($(SI),a)
           return signbit(fp) ? -b : b
       end
   end
