@@ -2,6 +2,8 @@ module QNaNs
 
 export qnan
 
+import Base: sign_mask, signbit
+
 if !isdefined(:xor)
     xor{T}(a::T, b::T) = (a $ b)
 end
@@ -20,27 +22,27 @@ end
      0x7ff8000000000000, 0x7fc00000, 0x7e00.
 =#
 
-for (FL, I, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000, :0xfff8000000000000),
-                                (:Float32, :Int32, :UInt32, :0x7fc00000, :0xffc00000),
-                                (:Float16, :Int16, :UInt16, :0x7e00, :0xfe00) ]
+for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000, :0xfff8000000000000),
+                                 (:Float32, :Int32, :UInt32, :0x7fc00000, :0xffc00000),
+                                 (:Float16, :Int16, :UInt16, :0x7e00, :0xfe00) ]
   @eval begin
-      function qnan(si::$(I))
+      signbit(x::$SI) = signbit($FL)  
+        
+      function qnan(si::$(SI))
           u = reinterpret($(UI), abs(si))
           if (u > ~$(UNeg)) # 2^51-1, 2^22-1, 2^9-1
               throw(ArgumentError("The value $(si) exceeds the payload range."))
           end
-          u |= ((si >= 0) ? $(UPos) : $(UNeg))
-          reinterpret($(FL),u)
+          u |= signbit(si) ? $(UPos) : $(UNeg)
+          return reinterpret($(FL),u)
       end
 
       function qnan(fp::$(FL))
+          !isnan(fp) && throw(ArgumentError("The value $(fp) is not a NaN."))
           u = reinterpret($(UI), fp)
-          if !isnan(fp)
-              throw(ArgumentError("The value $(fp) is not a NaN."))
-          end
           a = u & ~$(UNeg)
           b =  reinterpret($(I),a)
-          (((u & xor($(UPos), $(UNeg))) == 0) ? b : -b)
+          return signbit(fp) ? -b : b
       end
   end
 end
