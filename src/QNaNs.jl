@@ -25,8 +25,8 @@ end
 for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000, :0xfff8000000000000),
                                  (:Float32, :Int32, :UInt32, :0x7fc00000, :0xffc00000),
                                  (:Float16, :Int16, :UInt16, :0x7e00, :0xfe00) ]
-  @eval begin
-      signbit(x::$SI) = (x & sign_mask($SI)) == sign_mask($SI)
+  @eval begin  
+      signbit(x::$SI) = (x & sign_mask($FL)) == sign_mask($FL)
         
       function qnan(si::$(SI))
           u = reinterpret($(UI), abs(si))
