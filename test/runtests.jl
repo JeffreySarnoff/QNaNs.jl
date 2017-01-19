@@ -1,11 +1,11 @@
 using QNaNs
 using Base.Test
 
-@test isnan(qnan(5)) == true
-@test isnan(qnan(Int32(5))) == true
-@test isnan(qnan(Int16(5))) == true
+@test isnan(qnan(Int64(3))) == true
+@test isnan(qnan(Int32(3))) == true
+@test isnan(qnan(Int16(3))) == true
 
-@test typeof(qnan(5)) == Float64
+@test typeof(qnan(Int64(5))) == Float64
 @test typeof(qnan(Int32(5))) == Float32
 @test typeof(qnan(Int16(5))) == Float16
 
@@ -17,5 +17,5 @@ using Base.Test
 @test qnan(qnan(Int32(-22))) == -22
 @test qnan(qnan(Int16(-22))) == -22
 
-@test qnan(0) === NaN
-@test qnan(0%Int32) === NaN32
+@test qnan(zero(Int64)) === NaN
+@test qnan(zero(Int32)) === NaN32
