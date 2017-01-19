@@ -33,7 +33,7 @@ for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000
           if (u > ~$(UNeg)) # 2^51-1, 2^22-1, 2^9-1
               throw(ArgumentError("The value $(si) exceeds the payload range."))
           end
-          u |= signbit(si) ? $(UPos) : $(UNeg)
+          u |= signbit(si) ? $(UNeg) : $(UPos)
           return reinterpret($(FL),u)
       end
 
