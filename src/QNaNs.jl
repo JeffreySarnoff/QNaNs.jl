@@ -2,7 +2,6 @@ module QNaNs
 
 export qnan
 
-import Base: sign_mask, signbit
 
 if !isdefined(:xor)
     xor{T}(a::T, b::T) = (a $ b)
@@ -26,8 +25,6 @@ for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000
                                  (:Float32, :Int32, :UInt32, :0x7fc00000, :0xffc00000),
                                  (:Float16, :Int16, :UInt16, :0x7e00, :0xfe00) ]
   @eval begin  
-      signbit(x::$SI) = (reinterpret($UI,x) & sign_mask($FL)) != zero($UI)
-        
       function qnan(si::$(SI))
           u = reinterpret($(UI), abs(si))
           if (u > ~$(UNeg)) # 2^51-1, 2^22-1, 2^9-1
@@ -44,7 +41,7 @@ for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000
           b =  reinterpret($(SI),a)
           return signbit(fp) ? -b : b
       end
-  end
+   end
 end
 
 @doc """
