@@ -3,8 +3,8 @@ os:
   - linux
   - osx
 julia:
-  - nightly
   - 0.5 
+  - nightly  
 environment:
   matrix:
   - JULIAVERSION: "julialang/bin/winnt/x86/0.5/julia-0.5-latest-win32.exe"
