@@ -58,7 +58,7 @@ A QNaN introduced into a numerical processing sequence usually will propogate al
 
 When two qnans are arguments to the same binary op, Julia propagates the qnan on the left hand side. 
 ```julia
-> using QNaN
+> using QNaNs
 > function test()
     lhs = qnan(-64)
     rhs = qnan(100)
