@@ -3,8 +3,8 @@ module QNaNs
 export qnan
 
 
-if !isdefined(:xor)
-    xor{T}(a::T, b::T) = (a $ b)
+if !@isdefined xor
+    xor(a::T, b::T) where {T} = (a $ b)
 end
 
 #=
@@ -44,16 +44,16 @@ for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000
    end
 end
 
-@doc """
+"""
   **qnan**(`si`::{Int64|32|16}) generates a quiet NaN with a payload of `si`  
 
   **qnan**(`fp`::{Float64|32|16}) recovers the signed integer payload from `fp`  
-""" -> QNaNs
+""" QNaNs
 
-@doc """
+"""
   **qnan**(`si`::{Int64|32|16}) generates a quiet NaN with a payload of `si`  
 
   **qnan**(`fp`::{Float64|32|16}) recovers the signed integer payload from `fp`
-""" -> qnan
+""" qnan
 
 end # module
