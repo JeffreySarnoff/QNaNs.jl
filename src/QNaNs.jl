@@ -36,6 +36,16 @@ for (FL, SI, UI, UPos, UNeg) in [(:Float64, :Int64, :UInt64, :0x7ff8000000000000
           return reinterpret($(FL),u)
       end
 
+      function qnan(ui::$(UI))
+          si = ui%($SI)
+          u = reinterpret($(UI), abs(si))
+          if (u > ~$(UNeg)) # 2^51-1, 2^22-1, 2^9-1
+              throw(ArgumentError("The value $(si) exceeds the payload range."))
+          end
+          u |= signbit(si) ? $(UNeg) : $(UPos)
+          return reinterpret($(FL),u)
+      end
+      
       function qnan(fp::$(FL))
           !isnan(fp) && throw(ArgumentError("The value $(fp) is not a NaN."))
           u = reinterpret($(UI), fp)
