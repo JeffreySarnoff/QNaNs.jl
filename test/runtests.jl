@@ -1,5 +1,5 @@
 using QNaNs
-using Base.Test
+using Test
 
 @test isnan(qnan(Int64(3))) == true
 @test isnan(qnan(Int32(3))) == true
