@@ -3,4 +3,7 @@ name = "QNaNs"
 uuid = "c947b005-6f94-5690-8353-b90d48bfe02f"
 repo = "https://github.com/JeffreySarnoff/QNaNs.jl.git"
 license = "MIT"
-version = "0.3.0"
+version = "0.3.1"
+
+[compat]
+julia = "1"
