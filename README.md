@@ -4,7 +4,7 @@ Simplifies the use of quiet NaNs to propagate information from within numerical 
                                                        Jeffrey Sarnoff © 2016-Mar-26 at New York
 ```
 
-####Quick Look
+#### Quick Look
 
 ```julia
 > Pkg.add("QNaNs")
@@ -52,7 +52,7 @@ The payload for a Float16 qnan is an integer [-(2^9-1),(2^9-1)]
 
 Julia uses a payload of zero for NaN, NaN32, NaN16.
 
-####About QNaN Propogation
+#### About QNaN Propogation
 
 A QNaN introduced into a numerical processing sequence usually will propogate along the computational path without loss of identity unless another QNaN is substituted or an second QNaN occurs in an arithmetic expression.
 
