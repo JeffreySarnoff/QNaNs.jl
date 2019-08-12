@@ -1,13 +1,7 @@
 module QNaNs
 
-export qnan
+export qnan, getPayload, setPayload, setPayloadSignaling
 
-
-if VERSION < v"0.6.9"
-    if !isdefined(:xor)
-        xor{T}(a::T, b::T) = (a $ b)
-    end
-end
 
 #=
   A float64 quiet NaN is represented with these 2^52-2 UInt64 hexadecimal patterns:
@@ -67,5 +61,45 @@ end
 
   **qnan**(`fp`::{Float64|32|16}) recovers the signed integer payload from `fp`
 """ qnan
+
+"""
+    getPayload(source::T) where {T<:AbstractFloat}
+
+If the source opearand is a NaN, the result is the payload as a non-negative floating-point integer.
+Otherwise the result is -one(T).
+""" getPayload
+
+function getPayload(source::T) where {T<:AbstractFloat}
+    !isnan(source) && return -one(T)
+    payload = abs(qnan(source))
+    return T(payload)
+end
+
+        
+"""
+    setPayload(source::T) where {T<:AbstractFloat}
+
+If the source operatand is a non-negative floating point integer whose value
+is one of the admissible payloads, the result is a quiet NaN with that payload.
+Otherwise the result is zero(T).
+""" setPayload
+
+function setPayload(source::T; unsd::Unsigned=Unsigned) where {T<:AbstractFloat}
+    if !isinteger(source) || signbit(source) || source > payloadmax(T)
+        return zero(T)
+    end
+    usource = unsd(source)
+    result = qnan(usource)
+    return T(result)
+end
+
+"""
+    setPayloadSignaling(source::T) where {T<:AbstractFloat}
+
+If the source operatand is a non-negative floating point integer whose value
+is one of the admissible payloads, the result is a signaling NaN with that payload.
+Otherwise the result is zero(T).
+""" setPayloadSignaling
+
 
 end # module
