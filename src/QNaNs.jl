@@ -1,6 +1,6 @@
 module QNaNs
 
-export qnan, getPayload, setPayload, setPayloadSignaling
+export qnan, getPayload, setPayload # , setPayloadSignaling
 
 
 #=
@@ -93,6 +93,7 @@ function setPayload(source::T; unsd::Unsigned=Unsigned) where {T<:AbstractFloat}
     return T(result)
 end
 
+#=
 """
     setPayloadSignaling(source::T) where {T<:AbstractFloat}
 
@@ -100,6 +101,6 @@ If the source operatand is a non-negative floating point integer whose value
 is one of the admissible payloads, the result is a signaling NaN with that payload.
 Otherwise the result is zero(T).
 """ setPayloadSignaling
-
+=#
 
 end # module
