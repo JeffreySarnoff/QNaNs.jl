@@ -1,6 +1,6 @@
 module QNaNs
 
-export qnan, getPayload, setPayload # , setPayloadSignaling
+export qnan, payload, setpayload # , setpayloadSignaling
 
 
 #=
@@ -63,13 +63,13 @@ end
 """ qnan
 
 """
-    getPayload(source::T) where {T<:AbstractFloat}
+    payload(source::T) where {T<:AbstractFloat}
 
 If the source opearand is a NaN, the result is the payload as a non-negative floating-point integer.
 Otherwise the result is -one(T).
-""" getPayload
+""" payload
 
-function getPayload(source::T) where {T<:AbstractFloat}
+function payload(source::T) where {T<:AbstractFloat}
     !isnan(source) && return -one(T)
     payload = abs(qnan(source))
     return T(payload)
@@ -77,14 +77,14 @@ end
 
         
 """
-    setPayload(source::T) where {T<:AbstractFloat}
+    setpayload(source::T) where {T<:AbstractFloat}
 
 If the source operatand is a non-negative floating point integer whose value
 is one of the admissible payloads, the result is a quiet NaN with that payload.
 Otherwise the result is zero(T).
-""" setPayload
+""" setpayload
 
-function setPayload(source::T; unsd::Unsigned=Unsigned) where {T<:AbstractFloat}
+function setpayload(source::T; unsd::Unsigned=Unsigned) where {T<:AbstractFloat}
     if !isinteger(source) || signbit(source) || source > payloadmax(T)
         return zero(T)
     end
@@ -95,12 +95,12 @@ end
 
 #=
 """
-    setPayloadSignaling(source::T) where {T<:AbstractFloat}
+    setpayloadSignaling(source::T) where {T<:AbstractFloat}
 
 If the source operatand is a non-negative floating point integer whose value
 is one of the admissible payloads, the result is a signaling NaN with that payload.
 Otherwise the result is zero(T).
-""" setPayloadSignaling
+""" setpayloadSignaling
 =#
 
 end # module
