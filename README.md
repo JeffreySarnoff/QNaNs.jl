@@ -1,7 +1,7 @@
 # QNaNs.jl
 Simplifies the use of quiet NaNs to propagate information from within numerical computations.&nbsp;&nbsp; [![Build Status](https://travis-ci.org/JeffreySarnoff/QNaNs.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/QNaNs.jl)
 ```ruby
-                                                       Jeffrey Sarnoff © 2016-Mar-26 at New York
+                        Jeffrey Sarnoff © 2016-Mar-26 .. 2020-Mar-14 at US:New_York
 ```
 
 #### Quick Look
