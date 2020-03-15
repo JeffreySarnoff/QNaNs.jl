@@ -18,7 +18,7 @@ NaN
 
 > typeof(a_qnan)
 Float64
-> isnan(a_qnan), isnan(NaN)   # quiet NaNs areNaNs
+> isnan(a_qnan), isnan(NaN)   # quiet NaNs are NaNs
 true, true
 
 # works with Float64, Float32 and Float16
