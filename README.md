@@ -11,6 +11,7 @@ Simplifies the use of quiet NaNs to propagate information from within numerical 
 #### Quick Look
 
 ```julia
+> using Pkg
 > Pkg.add("QNaNs")
 ```
 ```julia
