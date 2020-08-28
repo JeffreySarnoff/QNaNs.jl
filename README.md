@@ -16,6 +16,7 @@ Simplifies the use of quiet NaNs to propagate information from within numerical 
 ```
 ```julia
 > using QNaNs
+
 > qnan_a = qnan(36)
 NaN
 > payload = qnan(qnan_a)
@@ -70,6 +71,7 @@ A QNaN introduced into a numerical processing sequence usually will propogate al
 When two qnans are arguments to the same binary op, Julia propagates the qnan on the left hand side. 
 ```julia
 > using QNaNs
+
 > function test()
     lhs = qnan(-64)
     rhs = qnan(100)
