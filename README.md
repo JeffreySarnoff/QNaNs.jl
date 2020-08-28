@@ -1,8 +1,12 @@
 # QNaNs.jl
-Simplifies the use of quiet NaNs to propagate information from within numerical computations.&nbsp;&nbsp; [![Build Status](https://travis-ci.org/JeffreySarnoff/QNaNs.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/QNaNs.jl)
-```ruby
-                        Jeffrey Sarnoff © 2016-Mar-26 .. 2020-Mar-14 at US:New_York
-```
+Simplifies the use of quiet NaNs to propagate information from within numerical computations.
+
+----
+#### Copyright © 2016-2020 by Jeffrey Sarnoff.  This material is released under the MIT license.
+
+&nbsp;&nbsp; [![Build Status](https://travis-ci.org/JeffreySarnoff/QNaNs.jl.svg?branch=master)](https://travis-ci.org/JeffreySarnoff/QNaNs.jl)
+
+----
 
 #### Quick Look
 
@@ -11,25 +15,31 @@ Simplifies the use of quiet NaNs to propagate information from within numerical 
 ```
 ```julia
 > using QNaNs
-> a_qnan = qnan(36)
+> qnan_a = qnan(36)
 NaN
-> payload = qnan(a_qnan)
+> payload = qnan(qnan_a)
 36
-
-> typeof(a_qnan)
+> typeof(qnan_a)
 Float64
-> isnan(a_qnan), isnan(NaN)   # quiet NaNs are NaNs
+> isnan(qnan_a), isnan(NaN)   # quiet NaNs are NaNs
 true, true
+
+> qnan_b = qnan(-36)
+> qnan(qnan_b)
+-36
+> signbit(qnan_a), signbit(qnan_b)
+false, true
+
 
 # works with Float64, Float32 and Float16
 
-> a_qnan32 = qnan(Int32(-77))
+> qnan_b = qnan(Int32(-77))
 NaN32
-> payload = qnan(a_qnan32); payload, typeof(payload)
+> payload = qnan(qnan_b); payload, typeof(payload)
 -77, Int32
 
-> qnan16 = qnan(Int16(-77)); payload16 = qnan(qnan16);
-> qnan16, typeof(qnan16), payload16, typeof(payload16)
+> qnan_c = qnan(Int16(-77)); payload16 = qnan(qnan_c);
+> qnan_c, typeof(qnan_c), payload16, typeof(payload16)
 NaN16, Float16, -77, Int16
 
 ```
