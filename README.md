@@ -35,7 +35,7 @@ NaN16, Float16, -77, Int16
 ```
 
 
-#####William Kahan on QNaNs
+##### William Kahan on QNaNs
 
 NaNs propagate through most computations. Consequently they do get used. ... they are needed only for computation, with temporal sequencing that can be hard to revise, harder to reverse. NaNs must conform to mathematically consistent rules that were deduced, not invented arbitrarily ...
 
